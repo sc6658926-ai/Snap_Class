@@ -28,7 +28,9 @@ def teacher_screen_login():
         
     st.divider()
     
+    
     footer_dashboard()
+    
 
 def teacher_screen_register():
     c1,c2= st.columns(2, vertical_alignment= 'center', gap= 'xxlarge') 
