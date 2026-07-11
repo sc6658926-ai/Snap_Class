@@ -28,6 +28,13 @@ def teacher_screen_login():
         
     st.divider()
     
+    btnc1, btnc2 = st.columns(2)
+    
+    with btnc1:
+        st.button("Login", icon=':material/passkey:', shortcut= 'control+enter', width='stretch')
+        
+    with btnc2:
+        st.button("Register", icon=':material/passkey:', shortcut= 'control+k', width= 'stretch') 
     
     footer_dashboard()
     
