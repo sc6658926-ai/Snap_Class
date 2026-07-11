@@ -21,6 +21,10 @@ def teacher_screen_login():
         st.button ("Go back to Home", type= 'secondary', shortcut= 'control+backspace')
         
         st.header("Login using password", text_alignment='center')
+        teacher_username= st.text_input("Enter username", placeholder= 'shiva')
+        teacher_pass= st.text_input("Enter password", type= 'password')
+        
+        st.divider()
 
 def teacher_screen_register():
     c1,c2= st.column(2, vertical_alignment= 'center', gap= 'xxlarge') 
