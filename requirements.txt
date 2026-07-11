@@ -1,0 +1,19 @@
+#utilities
+numpy
+panda
+
+# face recognition
+scikit-learn
+dlib-bin 
+#that detect vector points of face
+git+https://github.com/ageitgey/face_recognition_models
+setuptools<70.0
+
+# make qr code from URL
+segno
+
+# this library preprocessing the image and gives methods to resize, flip image,etc
+pillow
+
+# basic front-end library
+streamlit
