@@ -7,11 +7,9 @@ def Teachers_screen():
 
     style_background_dashboard()             
     style_base_layout()
-        
-        
-def teacher_screen_login():
-    c1,c2 = st.button(2, vertical_alignment= 'center', gap= 'xxlarge')
     
+    c1,c2 = st.button(2, vertical_alignment= 'center', gap= 'xxlarge')
+        
     with c1:
         header_dashboard()
     with c2:
@@ -20,21 +18,5 @@ def teacher_screen_login():
     st.header("Login using password", text_alignment= 'center')
     st.space()
     
-    teacher_username = st.text_input("Enter username", placeholder= '@shiva123')
+    footer_dashboard()    
     
-    teacher_pass = st.text_input("Enter password", placeholder= 'password')
-    
-    st.divider()
-    
-    
-def teacher_screen_register():
-    c1,c2 = st.button(2, vertical_alignment= 'center', gap= 'xxlarge')
-    
-    with c1:
-        header_dashboard()
-    with c2:
-        st.button("")
- 
-
-
-         
