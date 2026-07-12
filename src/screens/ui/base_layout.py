@@ -16,7 +16,7 @@ def style_background_home():
                 
                 """, unsafe_allow_html = True)
     
-def style_backround_dashboard():
+def style_background_dashboard():
     st.markdown("""
         <style>
                     .stApp{
