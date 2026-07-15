@@ -98,7 +98,7 @@ def teacher_screen_register():
     
     with btnc1:
        if st.button("Register Now", icon=':material/passkey:', shortcut='control+enter', width= 'stretch', type='primary'):
-           success, message = register_teacher(teacher_username,teacher_name, teacher_pass,teacher_pass_confirm)
+           success, message = register_teacher(teacher_username,teacher_name, teacher_pass, confirm_pass)
            
            if success:
                 st.success(message)
