@@ -65,7 +65,7 @@ def register_teacher(teacher_username,teacher_name, teacher_pass, teacher_pass_c
         return False, "Password doesn't match"
     
     try:
-       create_teacher(teacher_name,teacher_username,teacher_pass)
+       create_teacher(teacher_name,teacher_username)
        return True,"Sucessfully created! Login now"
     except Exception as e:
         return False, "Unexpected Error!"
