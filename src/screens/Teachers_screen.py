@@ -40,35 +40,35 @@ def teacher_screen_login():
     btnc1, btnc2= st.columns(2)
     
     with btnc1:
-        st.button("Login", icon=':material/passkey:', shortcut='control+enter', width= 'stretch')
+     if st.button("Login", icon=':material/passkey:', shortcut='control+enter', width= 'stretch'):
         if teacher_login(teacher_username,teacher_pass):
             st.toast("Welcome back!", icon="🖐️")
             import time
-            st.time(1)
+            time.sleep(1)
             st.rerun()
         else:
-            st.error("Invalid Username or Password")
+            st.error("Invalid Username! or password")
     with btnc2:
      if st.button("Register Instead", icon= ':material/passkey:',shortcut='control+k', width= 'stretch', type='primary'):
         st.session_state.teacher_login_type= 'register'
-        
-    
     footer_dashboard()
+    
+    
     
 def register_teacher(teacher_username,teacher_name, teacher_pass, teacher_pass_confirm):
     if not teacher_pass or not teacher_name or not teacher_username:
         return False, "All feilds are required!"
     
     if check_teacher_exist(teacher_username):
-        return False, "Username already exist"
+            return False, "Username already exist"
     if teacher_pass != teacher_pass_confirm:
-        return False, "Password doesn't match"
+            return False, "Password doesn't match"
     
     try:
-       create_teacher(teacher_name,teacher_username)
+       create_teacher(teacher_username,teacher_name,teacher_pass)
        return True,"Sucessfully created! Login now"
     except Exception as e:
-        return False, "Unexpected Error!"
+        return False,str(e)
     
     
 def teacher_screen_register():   
