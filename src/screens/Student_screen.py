@@ -4,7 +4,7 @@ from src.screens.ui.base_layout import style_background_dashboard, style_base_la
 from src.screens.components.header import header_dashboard
 from src.screens.components.footer import footer_dashboard
  
-def Student_screen(): 
+def Student_screen():
     
     style_background_dashboard()
     style_base_layout()
