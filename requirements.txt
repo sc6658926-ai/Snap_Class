@@ -17,3 +17,9 @@ pillow
 
 # basic front-end library
 streamlit
+
+#this library is use for edit audio files
+librosa
+
+# sound recognition(match embeddings)
+resemblyzer
