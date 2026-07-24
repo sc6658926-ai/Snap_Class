@@ -59,7 +59,10 @@ def get_trained_model():
     except ValueError:
         pass
     
-    return {clf: 'clf', x:'x', y:'y' }
+    return {"clf": clf, 
+            "x":x,
+            "y":y
+            }
     
 def train_classifier():
     st.cache_resource.clear()
@@ -76,9 +79,9 @@ def predict_attendance(class_image_np):
     if not model_data:
         return detected_sudent,[],len(encoding)
     
-    clf = model_data('clf')
-    x_train = model_data('x')
-    y_train = model_data('y')
+    clf = model_data['clf']
+    x_train = model_data['x']
+    y_train = model_data['y']
     
     
     all_students= sorted(list(set(y_train)))
