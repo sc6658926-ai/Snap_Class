@@ -94,7 +94,7 @@ def Student_screen():
                       if audio_data:
                           voice_embd= get_voice_embedding(audio_data.read()) 
                           
-                          response_data= create_student(new_name, get_face_embeddings=face_embd,voice_embedding= voice_embd)  
+                          response_data= create_student(new_name, get_face_embedding=face_embd,voice_embedding= voice_embd)  
                           if response_data:
                               train_classifier()
                               st.session_state.is_logged_in= True
