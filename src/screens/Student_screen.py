@@ -7,20 +7,96 @@ from src.screens.components.footer import footer_dashboard
 from src.screens.pipelines.face_pipeline import predict_attendance,get_face_embeddings,train_classifier
 from src.screens.pipelines.voice_pipeline import get_voice_embedding
 
-from src.screens.database.db import get_all_students,create_student
+from src.screens.database.db import get_all_students,create_student,get_student_attendance,get_student_subjects,unenroll_student_to_subject
 from PIL import Image
 import numpy as np
 import time
+
+from src.screens.components.dialog_enroll import enroll_dialog
+from src.screens.components.subject_card import subject_card
  
 def  student_dashboard():
-    st.header('DASHBOARD HERE')
+   student_data= st.session_state.student_data
+   student_id= student_data['student_id']
+
+   c1,c2 = st.columns(2, vertical_alignment= 'center', gap= 'xxlarge')
+             
+   with c1:
+        header_dashboard()
+   with c2:
+        st.subheader(f"""welcome,{student_data['name']}""")
+        if st.button("Logout", type= 'secondary', key= 'loginbackbutton',shortcut= 'control+backspace'):
+            st.session_state['login_type']= None
+            del st.session_state.student_data
+            st.rerun()
+            
+   st.space() 
+   
+   c1,c2= st.columns(2)
+   with c1:
+       st.header("Your Enrolled subjects")
+       
+   with c2:
+       if st.button("Enroll in subject", type= 'primary', width='stretch'):
+        enroll_dialog()
+        
+   st.divider()
+   
+   with st.spinner("Loading your enrolled subjects..."):
+       
+       subjects = get_student_subjects(student_id)
+       logs= get_student_attendance(student_id)
+       
+   stats_map= {} 
+    
+   for log in logs:
+        sid= log['subject_id']
+        
+        if sid not in stats_map:
+            stats_map[sid]= {"total": 0, "attended":0}
+            
+        stats_map[sid] ['total'] += 1
+        
+        if log.get('is_present'):
+            stats_map[sid]['attended'] += 1
+        
+   cols = st.columns(2)
+   for i, sub_node in enumerate(subjects):
+        sub= sub_node['subjects']
+        sid = sub_node['subject_id']
+        
+        stats= stats_map.get(sid,{"total":0, "attended":0})
+        def unenroll_button():
+         if st.button("Unenroll from this course", type='tertiary', width='stretch', icon=':material/delete_forever:', key=f'Unenroll_{sid}'):
+            unenroll_student_to_subject(student_id, sid)
+            st.toast(f'Unenrolled from sub{['name']} successfully!')
+            st.rerun()
+                
+        with cols[i % 2]:
+            
+            subject_card(
+                name= sub['name'],
+                code= sub['subject_code'],
+                section= sub['section'],
+                
+                stats= [
+                    ('📆', 'Total', stats['total']),
+                    ('✅', 'Attended', stats['attended']),
+                ],
+                footer_callback= unenroll_button
+                
+            )        
+          
+       
+       
+   footer_dashboard()
 
 
 def Student_screen():
     
     style_background_dashboard()
     style_base_layout()
- 
+
     if 'student_data' in st.session_state:
         student_dashboard()
         return
@@ -29,11 +105,11 @@ def Student_screen():
             
     with c1:
         header_dashboard()
-    with c2:
-        if st.button("Go back to Home", type= 'secondary', key= 'loginbackbutton',shortcut= 'control+backspace'):
-            st.session_state['login_type']= None
-            st.rerun()
-            
+        with c2:
+            if st.button("Go back to Home", type= 'secondary', key= 'loginbackbutton',shortcut= 'control+backspace'):
+                st.session_state['login_type']= None
+                st.rerun()
+                
     st.header("Login using FACE_ID", text_alignment= 'center')
     st.space()
     st.space()
@@ -61,14 +137,14 @@ def Student_screen():
                     st.session_state.is_logged_in= True
                     st.session_state.user_role='student'
                     st.session_state.student_data= student
-                    st.toast(f'Welcome back{student['name']}')
+                    st.toast(f'Welcome back {student['name']}')
                     time.sleep(1)
-                    st.rerun
+                    st.rerun()
              else:
                 st.info('Face is not recognized! you might be a new student')
                 show_registration= True
     if show_registration:
-        with st.container(border=True) :
+        with st.container(border=True):
           st.header('Register new profile')
           new_name= st.text_input('Enter your name', placeholder='E.g. Shiva Chauhan')
           
@@ -94,15 +170,15 @@ def Student_screen():
                       if audio_data:
                           voice_embd= get_voice_embedding(audio_data.read()) 
                           
-                          response_data= create_student(new_name, face_embedding= face_embd,voice_embedding= voice_embd)  
-                          if response_data:
-                              train_classifier()
-                              st.session_state.is_logged_in= True
-                              st.session_state.user_role='student'
-                              st.session_state.student_data= response_data[0]
-                              st.toast(f'Profile created! Hi{new_name}')
-                              time.sleep(1)
-                              st.rerun
+                      response_data= create_student(new_name, face_embedding= face_embd,voice_embedding= voice_embd)  
+                      if response_data:
+                            train_classifier()
+                            st.session_state.is_logged_in= True
+                            st.session_state.user_role='student'
+                            st.session_state.student_data= response_data[0]
+                            st.toast(f'Profile created! Hi {new_name}')
+                            time.sleep(1)
+                            st.rerun()
                   else :
                        st.error('Couldnot capture your facial features for recognition')
                               

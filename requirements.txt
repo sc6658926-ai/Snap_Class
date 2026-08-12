@@ -1,9 +1,13 @@
+# basic front-end library
+streamlit
+
 #utilities
 numpy
-panda
+pandas
 
 # face recognition
 scikit-learn
+
 dlib-bin 
 #that detect vector points of face
 git+https://github.com/ageitgey/face_recognition_models

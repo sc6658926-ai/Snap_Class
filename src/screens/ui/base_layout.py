@@ -41,9 +41,9 @@ def style_base_layout():
         
         /*Hide top bar streamlit*/ 
         
-        #MainMenu, footer, header{
-            visibility: hidden;
-        }
+          MainMenu, footer, header{
+             visibility: hidden;
+         }
             .block-container{
              padding-top: 0rem !important;
         }
@@ -66,7 +66,7 @@ def style_base_layout():
         button{
             border-radius : 1.5rem !important;
             color: white !important;
-            background:  #5865F2 !important;
+            background-color:  #5865F2 !important;
             padding: 10px 20px !important;
             border: none !important;
             transition: transform 0.25s ease-in-out !important;
@@ -75,7 +75,7 @@ def style_base_layout():
         button[kind= "secondary"]{
             border-radius: 1.5rem !important;
             color: white !important;
-            background: #EB459E !important;
+            background-color: #EB459E !important;
             padding: 10px 20px !important;
             border: none !important;
             transition: transform 0.25s ease-in-out !important;
@@ -85,7 +85,7 @@ def style_base_layout():
         button[kind = "tertiary"]{
             border-radius: 1.5rem !important;
             color: white !important;
-            background: black !important;
+            background-color: black !important;
             padding: 10px 20px !important;
             border: none !important;
             transition: transform 0.25s ease-in-out !important;

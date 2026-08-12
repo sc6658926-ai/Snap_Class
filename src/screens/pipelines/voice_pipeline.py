@@ -11,7 +11,7 @@ def load_voice_encoder():
 def get_voice_embedding(audio_bytes):
     
     try:
-        encoder= load_voice_encoder
+        encoder= load_voice_encoder()
     
         audio,sr= librosa.load(io.BytesIO(audio_bytes), sr= 16000)
         wav= preprocess_wav(audio)
@@ -19,7 +19,8 @@ def get_voice_embedding(audio_bytes):
         return embedding.tolist()
     
     except Exception as e:
-        st.error('voice recog error')
+        st.error(f'voice recog error {e}')
+        print(e)
         return None
     
 def identify_speaker(new_embedding, candidate_dict, threshold= 0.65):
@@ -49,7 +50,7 @@ def process_bulk_audio(audio_bytes, candidates_dict, threshold= 0.65):
         
         segments= librosa.effects.split(audio, top_db= 30)
         
-        identified_result= {}
+        identified_results= {}
         
         for start, end in segments:
             if (end- start) < sr* 0.5:
@@ -62,12 +63,12 @@ def process_bulk_audio(audio_bytes, candidates_dict, threshold= 0.65):
             sid,score= identify_speaker(embedding,candidates_dict, threshold)
             
             if sid:
-                if sid not in identify_speaker or score > identified_result[sid]:
-                    identified_result[sid]= score
+                if sid not in identified_results or score > identified_results[sid]:
+                    identified_results[sid]= score
                     
-            return identified_result
+        return identified_results
     except Exception as e:
-          st.error('Bulk process Error')
+          st.error(f'Bulk process Error: {e}')
           return {}
               
                 
