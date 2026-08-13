@@ -27,3 +27,5 @@ librosa
 
 # sound recognition(match embeddings)
 resemblyzer
+
+supabase
