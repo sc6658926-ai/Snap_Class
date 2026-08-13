@@ -28,4 +28,7 @@ librosa
 # sound recognition(match embeddings)
 resemblyzer
 
+#storage cloud
 supabase
+
+bcrypt
