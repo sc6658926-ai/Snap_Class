@@ -7,7 +7,7 @@ from src.screens.components.dialog_auto_enroll import auto_enroll_dialog
 
 def main():
     st.set_page_config(
-        page_title= 'SnapClass- Making Attendance faster using AI',
+        page_title= 'SnapClass-Making Attendance faster using AI',
         page_icon='https://media.licdn.com/dms/image/v2/C4D12AQGMQqI0E9Cw7g/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1520204388026?e=2147483647&v=beta&t=YQGbmT7i56gXsiE8IXyb4jXZnvBXbUGuGfioOXLRIVU'
     )
     if 'login_type' not in st.session_state:

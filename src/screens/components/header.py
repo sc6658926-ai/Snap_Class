@@ -1,8 +1,10 @@
 import streamlit as st
+from pathlib import Path
+import base64
 
 def header_home():
 
-  logo_url = "https://media.licdn.com/dms/image/v2/C4D12AQGMQqI0E9Cw7g/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1520204388026?e=2147483647&v=beta&t=YQGbmT7i56gXsiE8IXyb4jXZnvBXbUGuGfioOXLRIVU"
+  logo_url = "G:/downloads/f9a38c6f-af9d-4468-8522-ae1644a4df4f.jpg"
   
   st.markdown(f"""
     <div style= "display:flex; flex-direction:column; align-items:center; justify-content:center; margin-bttom: 100px;">
