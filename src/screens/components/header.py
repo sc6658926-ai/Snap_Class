@@ -4,11 +4,16 @@ import base64
 
 def header_home():
 
-  logo_url = "G:/downloads/f9a38c6f-af9d-4468-8522-ae1644a4df4f.jpg"
+  logo_path = Path("static/img/logo.jpg")
+  
+  with open(logo_path, "rb") as f:
+    logo_base64 = base64.b64encode(f.read()).decode()
+   
+   
   
   st.markdown(f"""
-    <div style= "display:flex; flex-direction:column; align-items:center; justify-content:center; margin-bttom: 100px;">
-        <img src = '{logo_url}' style='height: 100px;'/>
+    <div style= "display:flex; flex-direction:column; align-items:center; justify-content:center; margin-bottom: 100px;">
+        <img src = '{logo_base64}' style='height: 100px;'/>
         <h1 style ='text-align:center; color:#E0E3FF'> SNAP</br> CLASS</h1>
     </div>
               
