@@ -146,12 +146,12 @@ def teacher_tab_take_attendance():
                     
                     all_detected_id.setdefault(student_id, []).append(f'Photo{idx+1}') 
                     
-                enroll_res= supabase.table('subjects_students').select("*, students(*)").eq('subject_id', selected_subject_id).execute()
-                enrolled_students= enroll_res.data
+               enroll_res= supabase.table('subjects_students').select("*, students(*)").eq('subject_id', selected_subject_id).execute()
+               enrolled_students= enroll_res.data
                 
-                if not enrolled_students:
+               if not enrolled_students:
                     st.warning("No students enrolled in this course") 
-                else:
+               else:
                      results, attendance_to_logs= [],[]
                      
                      current_timestamp= datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
@@ -178,7 +178,7 @@ def teacher_tab_take_attendance():
                          })
 # is dialog do chije denge wo results jo hume dikhane h pandas main dal denge taki easily wo table main dikha sake
                 
-                attendance_result_dialog(pd.DataFrame(results), attendance_to_logs)
+               attendance_result_dialog(pd.DataFrame(results), attendance_to_logs)
     with c3:
         if st.button("Use voice attendance", width='stretch', icon=':material/mic:', type='primary'):
          voice_attendance_dialog(selected_subject_id)              
