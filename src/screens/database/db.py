@@ -79,6 +79,7 @@ def create_attendance(logs):# attendance ke logs lelenge
 def get_attendance_for_teacher(teacher_id):
     #  subject_id ka inner join karenge subjects se taki teacher_id mil jaye
     response= supabase.table('attendance').select("*, subjects!inner(*)").eq('subjects.teacher_id', teacher_id).execute()
+    return response.data
     
 
    

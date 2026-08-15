@@ -269,7 +269,7 @@ def teacher_tab_attendance_record():
         
     )
     
-    display_df= ( summary.sort_values(groupby= 'its_group', ascending= False)
+    display_df= ( summary.sort_values(by= 'its_group', ascending= False)
                  [['Time', "Subject", 'Subject_code', 'Attendance stats']]
                  
                  )
